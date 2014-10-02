@@ -1,0 +1,380 @@
+Script started on Sat 06 Sep 2014 04:41:06 PM CDT
+]0;matt@matt-X202E: ~/workspace/playplace/calvinCompmatt@matt-X202E:~/workspace/playplace/calvinComp$ ls
+code.cpp  typescript
+]0;matt@matt-X202E: ~/workspace/playplace/calvinCompmatt@matt-X202E:~/workspace/playplace/calvinComp$ g++ code.cpp -std= c++11
+]0;matt@matt-X202E: ~/workspace/playplace/calvinCompmatt@matt-X202E:~/workspace/playplace/calvinComp$ ls
+[0m[01;32ma.out[0m  code.cpp  typescript
+]0;matt@matt-X202E: ~/workspace/playplace/calvinCompmatt@matt-X202E:~/workspace/playplace/calvinComp$ ./a.out
+
+
+Starting Problem 21...
+31626
+Time to get the answer [ms]: 37
+
+
+Starting Problem 36...
+872187
+Time to get the answer [ms]: 478
+
+
+Starting Problem 75...
+161667
+Time to get the answer [ms]: 98
+
+
+Starting Problem 138...
+17
+305
+5473
+98209
+1762289
+31622993
+567451585
+^C
+]0;matt@matt-X202E: ~/workspace/playplace/calvinCompmatt@matt-X202E:~/workspace/playplace/calvinComp$ ls
+[0m[01;32ma.out[0m  code.cpp  typescript
+]0;matt@matt-X202E: ~/workspace/playplace/calvinCompmatt@matt-X202E:~/workspace/playplace/calvinComp$ vim code.cpp 
+[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;37r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[37;1H"code.cpp" 314L, 7487C[>c[1;1H[35m#include [m[31m<iostream>[m
+[35m#include [m[31m<vector>[m
+[35m#include [m[31m<cmath>[m
+[35m#include [m[31m<map>[m
+[35m#include [m[31m<chrono>[m
+[35m#include [m[31m<string>[m
+[35m#include [m[31m<climits>[m
+
+
+[34m// Helper Classes [14;1H// Generic function to sum a vector [m
+[32mtemplate[m<[32mtypename[m Type>
+Type sum(std::vector<Type> vectorToSum)
+{
+    Type sumValue = [31m0[m;
+    [33mfor[m ([32mtypename[m std::vector<Type>::iterator it = vectorToSum.beginn[20;1H();[21;13Hit != vectorToSum.end(); it++)
+    {[23;9HsumValue += *it;
+    }
+    [33mreturn[m sumValue;
+}
+
+[34m// Calculate time taken in [ms], given two high_resolution time_poinn[29;1Hts[m
+[32mlong[m [32mlong[m timeTaken(std::chrono::high_resolution_clock::time_point ss[31;1Htart,
+    std::chrono::high_resolution_clock::time_point end)
+{
+    [33mreturn[m std::chrono::duration_cast<std::chrono::milliseconds>(endd[35;1H - start).count();
+}[37;51H1,1[11CTop[1;1H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[37;1H[K[37;1H:[?12l[?25hw[?25l[?12l[?25hq[?25l[?12l[?25h[?25l"code.cpp" 314L, 7487C written
+[?1l>[?12l[?25h[?1049l]0;matt@matt-X202E: ~/workspace/playplace/calvinCompmatt@matt-X202E:~/workspace/playplace/calvinComp$ cat code.cpp 
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <map>
+#include <chrono>
+#include <string>
+#include <climits>
+
+
+// Helper Classes 
+
+
+
+// Generic function to sum a vector 
+template<typename Type>
+Type sum(std::vector<Type> vectorToSum)
+{
+    Type sumValue = 0;
+    for (typename std::vector<Type>::iterator it = vectorToSum.begin(); 
+            it != vectorToSum.end(); it++)
+    {
+        sumValue += *it;
+    }
+    return sumValue;
+}
+
+// Calculate time taken in [ms], given two high_resolution time_points
+long long timeTaken(std::chrono::high_resolution_clock::time_point start,
+    std::chrono::high_resolution_clock::time_point end)
+{
+    return std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+}
+
+int greatestCommonDivisor(int m, int n)
+{
+    if (m < 0) m = -m;
+    if (n < 0) n = -n;
+
+    if ((m == 0) || (n == 0)) return 0;
+
+    // Euclidean algorithm
+    int remainder;
+    while (1)
+    {
+        remainder = m % n;
+        if (remainder == 0)
+            return n;
+        m = n;
+        n = remainder;
+    }
+}
+
+bool areCoprime(int a, int b)
+{
+    return greatestCommonDivisor(a, b) == 1;
+}
+
+
+// Retrieve a list of proper divisors of a number
+std::vector<int> getProperDivisors(int n)
+{
+    // Loop through all numbers < sqrt(n)
+    // If they divide cleanly, add i, and i's complement
+    // Also, 1 is always a divisor
+
+    std::vector<int> properDivisors;
+    properDivisors.push_back(1);
+
+    for (unsigned i = 2; i <= std::sqrt(n); ++i)
+    {
+        if (n % i == 0)
+        {
+            properDivisors.push_back(i);
+            if (n / i != i) properDivisors.push_back(n / i);
+        }
+    }
+
+    return properDivisors;
+}
+
+
+
+
+
+// Check if a number is palindromic by comparing from the 
+// outside in
+bool isPalindrome(std::string n)
+{
+    for (unsigned i = 0; i < n.length() / 2; ++i)
+    {
+        if (n[i] != n[n.length() - i - 1])
+            return false;
+    }
+    return true;
+}
+
+// Check if a number is palindromic.. more like a wrapper class
+// for the legitimate function (which accepts a string)
+bool isPalindrome(int n)
+{
+    std::string number = std::to_string(n);
+    return isPalindrome(number);
+}
+
+
+// Convert a base10 number to base2
+std::string base10toBase2(int n)
+{
+    std::string base2 = "";
+    do
+    {
+        if ((n & 1) == 0)
+            base2 = "0" + base2;
+        else
+            base2 = "1" + base2;
+        n >>= 1;
+
+    } while (n);
+
+    return base2;
+}
+
+
+
+// End of helper classes 
+
+
+
+
+// Problems that I solved
+
+// ProjectEuler.net, problem21
+void Problem21()
+{
+    // Amicable Numbers
+    // d(n) == sum(proper_divisors(n))
+    // if d(a) == d(b), where a != b, then a, b are amicable numbers.
+
+    // Find the sum of all amicable numbers below 10,000
+
+    int propDivisorSum, count;
+    std::vector<int> properDivisorSums(10000), amicableNumbers;
+
+    for (unsigned a = 2; a < 10000; ++a)
+    {
+        propDivisorSum = sum(getProperDivisors(a));
+        properDivisorSums[a] = propDivisorSum;
+
+        if (propDivisorSum < 10000)
+        {
+            if (properDivisorSums[propDivisorSum] == a &&
+                a != propDivisorSum)
+            {
+                amicableNumbers.push_back(propDivisorSum);
+                amicableNumbers.push_back(a);
+            }
+        }
+    }
+
+    std::cout << sum(amicableNumbers);
+}
+
+
+// Problem 36 from ProjectEuler.net
+void Problem36()
+{
+    int sumOfDoublePalindromes = 0;
+
+    for (unsigned i = 0; i < 1000000; ++i)
+    {
+        if (isPalindrome(i))
+        {
+            if (isPalindrome(base10toBase2(i)))
+                sumOfDoublePalindromes += i;
+        }
+    }
+    std::cout << sumOfDoublePalindromes;
+}
+
+
+
+void Problem75()
+{
+    // Generate primitive primes from Euclid's formula
+    // a = m^2 - n^2, b = 2mn, c = m^2 + n^2
+    // Triple is primitive iff m & n are coprime, and m - n is odd
+
+    std::vector<int> prims(1500001);
+    int a, b, c, k, values = 0;
+    int upperLimit = (int)sqrt(1500000 / 2);
+    for (int m = 2; m < upperLimit; m++)
+    {
+        for (int n = 1; n < m; ++n)
+        {
+            if (areCoprime(m, n) && ((m + n) % 2 != 0))
+            {
+                a = m * m - n * n;
+                b = 2 * m * n;
+                c = m * m + n * n;
+
+                // Euclid's formula doesn't calculate further possiblities
+                // So we find them by adding k to itself iteratively
+                k = a + b + c;
+                while (k < 1500001)
+                {
+                    // If it's unique, then it deserves an iteration of the 
+                    // value counter
+                    prims[k]++;
+                    if (prims[k] == 1)
+                    {
+                        values++;
+                    }
+                    // If we end up creating this number again, take away
+                    // the value we added previously
+                    else if (prims[k] == 2)
+                    {
+                        values--;
+                    }
+                    k += a + b + c;
+                }
+            }
+        }
+    }
+
+    std::cout << values;
+
+}
+
+
+// This problem isn't completely finished... but it does the correct operations
+// It might finish if you let it run for .. probably 3 hours. I realize it's inefficient but
+// at least it works? :) 
+void Problem138()
+{
+    long long a, b, c, k, values = 0;
+    long long upperLimit = 1500000;
+    // The concept is similar to the other triangle problem
+    // Generate right triangles, but this time don't check their coprime-ness
+    // Instead, check if they fulfill the property the question asks
+    for (long long m = 2; m < LLONG_MAX; m++)
+    {
+        for (long long n = 1; n < m; ++n)
+        {
+            a = m * m - n * n;
+            b = 2 * m * n;
+            // Just switch b and a if b's > a
+            if (b > a)
+            {
+                long long t = b;
+                b = a;
+                a = t;
+            }
+            // Check if it fulfills the property...
+            if ((a == b * 2 - 1) || (a == b * 2 + 1))
+            {
+                c = m * m + n * n;
+                std::cout << c << std::endl;
+            }
+        }
+    }
+}
+
+
+
+// I threw all the problems in one .cpp file. Hope that makes sense for you.
+
+// I solved problems:
+// 21
+// 38
+// 75
+
+// I kinda solved problems:
+// 138
+
+
+int main(int argc, char ** argv)
+{
+
+    // Just uncomment the problems you'd like to run. 
+    // Generally, Ctrl-K-U uncomments a section.
+    auto clock = std::chrono::high_resolution_clock();
+
+
+    // Problem 21
+    std::cout << "\n\nStarting Problem 21...\n";
+    auto start = clock.now();
+    Problem21();
+    std::cout << "\nTime to get the answer [ms]: " << timeTaken(start, clock.now()) << std::endl;
+    
+
+
+    // Problem 36
+    std::cout << "\n\nStarting Problem 36...\n";
+    start = clock.now();
+    Problem36();
+    std::cout << "\nTime to get the answer [ms]: " << timeTaken(start, clock.now()) << std::endl;
+
+    // Problem 75
+    std::cout << "\n\nStarting Problem 75...\n";
+    start = clock.now();
+    Problem75();
+    std::cout << "\nTime to get the answer [ms]: " << timeTaken(start, clock.now()) << std::endl;
+
+
+    // Problem 138
+    std::cout << "\n\nStarting Problem 138...\n";
+    start = clock.now();
+    Problem138();
+    std::cout << "\nTime to get the answer [ms]: " << timeTaken(start, clock.now()) << std::endl;
+
+    // Obviously, you won't be able to finish the last problem.
+    // Unless you're crazy, and wait like 3 hours. Maybe days.
+}
+
+]0;matt@matt-X202E: ~/workspace/playplace/calvinCompmatt@matt-X202E:~/workspace/playplace/calvinComp$ exit
+
+Script done on Sat 06 Sep 2014 04:41:52 PM CDT

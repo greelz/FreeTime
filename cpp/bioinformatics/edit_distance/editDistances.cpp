@@ -188,7 +188,7 @@ long needlemenWunsch(std::string string1, std::string string2)
 
     // I choose to get the actual alignment here as well
     std::pair<std::string, std::string> alignment = nwAlignment(table, string1, string2);
-    std::cout << alignment.first << "\n" << alignment.second << "\n";
+    //std::cout << alignment.first << "\n" << alignment.second << "\n";
 
     // Edit distance is the bottom RHS value
     return table[lengthS1][lengthS2];
