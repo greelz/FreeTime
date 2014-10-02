@@ -156,7 +156,6 @@ long needlemenWunsch(std::string string1, std::string string2)
     int insertCost = 1, deleteCost = 1, substitutionCost = 1;
 
     std::vector< std::vector<int> > table(lengthS1 + 1, std::vector<int>(lengthS2 + 1));
-    std::vector< std::vector<int> > tableDirections(lengthS1 + 1, std::vector<int>(lengthS2 + 1));
 
     for (int i = 0; i < lengthS1 + 1; ++i)
     {
