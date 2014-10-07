@@ -37,9 +37,9 @@ public:
     }
 
 
-    void ordertraverse()
+    void inordertraverse()
     {
-        ordertraverse(root);
+        inordertraverse(root);
     }
     void preordertraverse()
     {
@@ -56,13 +56,13 @@ private:
     BinaryNode<T> *root;
 
 
-    void ordertraverse(BinaryNode<T> *node)
+    void inordertraverse(BinaryNode<T> *node)
     {
         if (node)
         {
-            ordertraverse(node->left);
+            inordertraverse(node->left);
             std::cout << node->value << " ";
-            ordertraverse(node->right);
+            inordertraverse(node->right);
 
         }
     }
@@ -135,17 +135,23 @@ int main()
     // The root node 
 
     btree<int> my_tree;
-    my_tree.insert(4);
-    my_tree.insert(5);
-    my_tree.insert(3);
 
-    my_tree.ordertraverse();
-    std::cout << std::endl;
-    my_tree.preordertraverse();
-    std::cout << std::endl;
-    my_tree.postordertraverse();
-    std::cout << std::endl;
-
+    // This is dumb, because the tree doesn't re-order itself.
+    // It will end up looking like this:
+    //     0
+    //       1
+    //         2
+    //           3
+    //             4
+    //               .
+    //               .
+    //               .
+    //               .
+    //                 1000
+    for (int i = 0; i < 1000; ++i)
+    {
+        my_tree.insert(i);
+    }
 
 }
 
