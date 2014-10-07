@@ -48,9 +48,9 @@ public:
         {
             // Either we need to overwrite, or insert the node
             // We will overwrite if bucket->name == name
-            if (bucket->name == name)
+            if (previous->name == name)
             {
-                bucket->phone = phone;
+                previous->phone = phone;
             }
             else
             {
@@ -111,6 +111,11 @@ int main()
 
     p.put("jim", "234234");
     p.get("jim", number);
+    std::cout << number << std::endl;
+
+
+    p.put("john", "1234");
+    p.get("john", number);
     std::cout << number << std::endl;
     
     return 0;
