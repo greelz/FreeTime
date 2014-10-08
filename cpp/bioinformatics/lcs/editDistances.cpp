@@ -184,8 +184,8 @@ long needlemenWunsch(std::string string1, std::string string2)
 
 
     // I choose to get the actual alignment here as well
-    //std::pair<std::string, std::string> alignment = nwAlignment(table, string1, string2);
-    //std::cout << alignment.first << "\n" << alignment.second << "\n";
+    std::pair<std::string, std::string> alignment = nwAlignment(table, string1, string2);
+    std::cout << alignment.first << "\n" << alignment.second << "\n";
 
     // Edit distance is the bottom RHS value
     return table[lengthS1][lengthS2];
@@ -235,6 +235,13 @@ std::string lcsBacktrack(std::vector< std::vector<int> > table,
     std::string finalString = "";
     int i = s1.length();
     int j = s2.length();
+    // Swap if necessary
+    if (i > j)
+    {
+        int t = i;
+        j = i;
+        i = t;
+    }
     while (i != 0 && j != 0)
     {
         if (table[i][j] == table[i - 1][j])
@@ -277,7 +284,7 @@ int main(int argc, char ** argv)
 
     std::cout << needlemenWunsch(text1, text2) << std::endl;
 
-    std::cout << lcsBacktrack(lcs(text1, text2), text1, text2);
+    std::cout << lcsBacktrack(lcs(text1, text2), text1, text2) << std::endl;
 
     return 0;
 

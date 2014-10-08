@@ -1,0 +1,12 @@
+Script started on Thu 02 Oct 2014 07:32:54 AM CDT
+]0;matt@matt-X202E: ~/workspace/FreeTime/cpp/bioinformatics/lcsmatt@matt-X202E:~/workspace/FreeTime/cpp/bioinformatics/lcs$ g++ editDistances.c pp
+]0;matt@matt-X202E: ~/workspace/FreeTime/cpp/bioinformatics/lcsmatt@matt-X202E:~/workspace/FreeTime/cpp/bioinformatics/lcs$ ./a.out 
+String 1: hello
+String 2: howfardoesitgo
+h-------e--llo
+howfardoesitgo
+11
+heo
+]0;matt@matt-X202E: ~/workspace/FreeTime/cpp/bioinformatics/lcsmatt@matt-X202E:~/workspace/FreeTime/cpp/bioinformatics/lcs$ exit
+
+Script done on Thu 02 Oct 2014 07:33:15 AM CDT
